@@ -32,7 +32,6 @@ export default function Login() {
         router.push(callbackUrl)
       }
     } catch (err) {
-      console.log(err)
       setLoading(false)
       toast.error('Failed to register')
     }

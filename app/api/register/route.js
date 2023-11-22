@@ -4,8 +4,7 @@ import User from '@/models/user'
 import bcrypt from 'bcrypt'
 
 export async function POST(req) {
-	const _req = await req.json() // req.body
-	console.log(_req)
+  const _req = await req.json() // req.body
 	await dbConnect()
 
 	try {
@@ -29,8 +28,7 @@ export async function POST(req) {
 				success: 'Registration successful. Please login.',
 			})
 		}
-	} catch (err) {
-		console.error(err)
+  } catch (err) {
 		return NextResponse.error(
 			{ err: 'Server error. Try Again' },
 			{ status: 500 },

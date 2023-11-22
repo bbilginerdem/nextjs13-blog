@@ -36,7 +36,6 @@ export default function Register() {
       setLoading(false)
       router.push('/login')
     } catch (err) {
-      console.log(err)
       setLoading(false)
       toast.error('Failed to register')
     }
