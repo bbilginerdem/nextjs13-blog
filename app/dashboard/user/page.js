@@ -1,4 +1,4 @@
-export default function UserDashboard() {
+export default function UserDashboard () {
   return (
     <div className="container">
       <div className="row">

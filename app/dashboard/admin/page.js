@@ -1,4 +1,4 @@
-export default function AdminDashboard() {
+export default function AdminDashboard () {
   return (
     <div className="container">
       <div className="row">

@@ -14,14 +14,14 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET
     }),
     CredentialsProvider({
-      async authorize(credentials, req) {
+      async authorize (credentials, req) {
         dbConnect()
         const { email, password } = credentials
         const user = await User.findOne({ email })
-        if (!user) {
+        if(!user) {
           throw new Error('Invalid email or password')
         }
-        if (!user.password) {
+        if(!user.password) {
           throw new Error(
             'Please login via the method you used to sign up',
           )
@@ -30,7 +30,7 @@ export const authOptions = {
           password,
           user.password,
         )
-        if (!isPasswordMatched) {
+        if(!isPasswordMatched) {
           throw new Error('Invalid email or password')
         }
         return user
@@ -39,14 +39,14 @@ export const authOptions = {
   ],
   callbacks: {
     // save user if they login via social networks
-    async signIn({ user }) {
+    async signIn ({ user }) {
       dbConnect()
 
       const { email } = user
 
       let dbUser = await User.findOne({ email })
 
-      if (!dbUser) {
+      if(!dbUser) {
         dbUser = await User.create({
           name: user.name,
           email: user.email,

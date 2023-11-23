@@ -1,9 +1,7 @@
-import Image from 'next/image'
-
-export default function Home() {
+export default function Home () {
   return (
-		<div className="container">
-			<p className="lead text-primary">Home</p>
-		</div>
+    <div className="container">
+      <p className="lead text-primary">Home</p>
+    </div>
   )
 }

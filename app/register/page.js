@@ -4,7 +4,7 @@ import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 
-export default function Register() {
+export default function Register () {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -24,7 +24,7 @@ export default function Register() {
         body: JSON.stringify({ name, email, password }),
       })
 
-      if (!res.ok) {
+      if(!res.ok) {
         const data = await res.json()
         toast.error(data.err)
         setLoading(false)
@@ -35,7 +35,7 @@ export default function Register() {
       toast.success(data.success)
       setLoading(false)
       router.push('/login')
-    } catch (err) {
+    } catch(err) {
       setLoading(false)
       toast.error('Failed to register')
     }

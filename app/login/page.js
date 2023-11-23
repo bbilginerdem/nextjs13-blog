@@ -5,7 +5,7 @@ import toast from 'react-hot-toast'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 
-export default function Login() {
+export default function Login () {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -25,13 +25,13 @@ export default function Login() {
       })
       setLoading(false)
 
-      if (result.error) {
+      if(result.error) {
         toast.error(result.error)
       } else {
         toast.success('Login successful')
         router.push(callbackUrl)
       }
-    } catch (err) {
+    } catch(err) {
       setLoading(false)
       toast.error('Failed to register')
     }
