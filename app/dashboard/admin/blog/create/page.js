@@ -42,14 +42,33 @@ export default function AdminBlogCreate () {
         }
       } catch(err) {
         setLoading(false)
-        console.log(err)
+        toast.error("An error occured. Try again.")
       }
     }
   }
 
   // submit to create blog api
   const handleSubmit = async (e) => {
-    //
+    try {
+      const response = await fetch(`${process.env.API}/admin/blog`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ title, content, category, image })
+      })
+
+      if(response.ok) {
+        router.push("/dashboard/admin")
+        toast.success("Blog created successfully")
+      } else {
+        const errorData = await response.json()
+        toast.error(errorData.err)
+      }
+    }
+    catch(e) {
+      toast.error("An error occured. Try again.")
+    }
   }
 
   return (
@@ -68,7 +87,7 @@ export default function AdminBlogCreate () {
           <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} className="form-control p-2 my-2" />
 
           {image && (
-            <img src={image} alt="preview image" style={{width: '100px'}} />
+            <img src={image} alt="preview image" style={{ width: '100px' }} />
           )}
 
           <div className='d-flex justify-content-between mt-3'>
