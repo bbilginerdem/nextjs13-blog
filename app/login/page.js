@@ -62,7 +62,7 @@ export default function Login () {
               className="btn btn-primary"
               disabled={loading || !email || !password}
             >
-              {loading ? 'Please wait...' : 'Submit'}
+              {loading ? 'Please wait...' : 'Login'}
             </button>
           </form>
           {/* Google Login  */}
