@@ -1,8 +1,8 @@
-import { NextResponse } from "next/server";
-import dbConnect from "@/utils/dbConnect";
-import Blog from "@/models/blog";
-import slugify from "slugify";
-import { getToken } from "next-auth/jwt";
+import { NextResponse } from 'next/server';
+import dbConnect from '@/utils/dbConnect';
+import Blog from '@/models/blog';
+import slugify from 'slugify';
+import { getToken } from 'next-auth/jwt';
 
 export async function POST(req) {
 	const _req = await req.json();
@@ -10,19 +10,17 @@ export async function POST(req) {
 
 	try {
 		const { title, content, category, image } = _req;
+		const existingBlog = await Blog.findOne({ slug: slugify(title?.toLowerCase()) });
 
 		switch (true) {
 			case !title:
-				return NextResponse.json({ err: "Title is required" }, { status: 400 });
+				return NextResponse.json({ err: 'Title is required' }, { status: 400 });
 			case !content:
-				return NextResponse.json({ err: "Content is required" }, { status: 400 });
+				return NextResponse.json({ err: 'Content is required' }, { status: 400 });
 			case !category:
-				return NextResponse.json({ err: "Category is required" }, { status: 400 });
-				// check if blog title is taken
-				const existingBlog = await Blog.findOne({ slug: slugify(title?.toLowerCase()) });
-				if (existingBlog) {
-					return NextResponse.json({ err: "Blog title is taken!" }, { status: 400 });
-				}
+				return NextResponse.json({ err: 'Category is required' }, { status: 400 });
+			case existingBlog:
+				return NextResponse.json({ err: 'Blog title is taken!' }, { status: 400 });
 		}
 
 		// get current user's id
@@ -33,9 +31,9 @@ export async function POST(req) {
 			title,
 			content,
 			category,
-			image: image ? image : null,
+			image: image || null,
 			postedBy: token.user._id,
-			slug: slugify(title),
+			slug: slugify(title)
 		});
 
 		return NextResponse.json(blog, { status: 200 });

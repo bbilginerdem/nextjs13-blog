@@ -23,7 +23,7 @@ async function getBlogs(searchParams) {
 export default async function Home({ searchParams }) {
 	const data = await getBlogs(searchParams);
 
-	const { blogs, currentPage, totalPages } = data;
+	const { currentPage, totalPages } = data;
 
 	const hasPreviousPage = currentPage > 1;
 	const hasNextPage = currentPage < totalPages;

@@ -42,7 +42,7 @@ export const authOptions = {
 			let dbUser = await User.findOne({ email });
 
 			if (!dbUser) {
-				dbUser = await User.create({
+				await User.create({
 					name: user.name,
 					email: user.email,
 					image: user.image
