@@ -35,11 +35,11 @@ export default function AdminBlogCreate () {
           body: formData,
         })
         if(response.ok) {
-          setLoading(false)
-          const data = await response.json()
-          console.log(data)
-          setImage(data.secure_url)
-        }
+					setLoading(false);
+					const data = await response.json();
+					// console.log(data)
+					setImage(data.secure_url);
+				}
       } catch(err) {
         setLoading(false)
         toast.error("An error occured. Try again.")
